@@ -25,11 +25,18 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-\dd
+skfsnhdfjbhfg;asdoi fetfijiotgver
+tr
+trg
+gtf
+g
+
+g
+
+fd
 d
-d
-d
-d
+gf
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
