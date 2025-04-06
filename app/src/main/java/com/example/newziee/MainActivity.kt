@@ -25,23 +25,18 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-skfsnhdfjbhfg;asdoi fetfijiotgver
-tr
-trg
-gtf
-g
 
-g
 
-fd
-d
-gf
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     NewzieeTheme {
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
 
+        }
     }
 }
 @Preview(showBackground = true)
