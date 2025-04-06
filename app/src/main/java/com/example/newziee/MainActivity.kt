@@ -26,3 +26,18 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+/*
+
+Plans are simple just contact saver up which can be
+
+-edited ,
+-saved ,
+-removed
+
+SharedPreferences for local database
+
+Simple , when nothing is written some simple type of triggering areas
+in a outlined areas , would be awesome for sure
+
+ */

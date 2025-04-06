@@ -1,8 +1,5 @@
 package com.example.newziee.SharedPref
-
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 
 class PreferenceManager(
     context: Context

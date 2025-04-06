@@ -92,6 +92,7 @@ fun SaveInformation(
                     onValueChange = {
                         name = it
                     },
+                    maxLines = 1
 
                 )
                 Spacer(modifier = modifier.height(10.dp))
@@ -100,7 +101,8 @@ fun SaveInformation(
                     onValueChange = {
                         name = it
                     },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    maxLines = 1
                 )
             }
         },
@@ -119,7 +121,7 @@ fun SaveInformation(
         confirmButton = {
             OutlinedButton(
                 onClick = {
-                   // some kind of logic but using function with check up for sure !!!
+                    // some kind of logic but using function with check up for sure !!!
                 }
             ) {
                 Text("Save")
