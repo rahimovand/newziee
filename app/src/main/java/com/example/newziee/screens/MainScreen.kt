@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.FloatingActionButtonElevation
@@ -25,9 +26,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.newziee.ui.theme.NewzieeTheme
 
 @Composable
@@ -43,7 +46,7 @@ fun MainScreen(
                 onClick = {
                     isClicked = true
                 },
-                containerColor = MaterialTheme.colorScheme.errorContainer,
+                containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
                 elevation = FloatingActionButtonDefaults.elevation(
                     defaultElevation = 1.dp,
                     focusedElevation = 0.dp,
@@ -97,12 +100,13 @@ fun SaveInformation(
                 )
                 Spacer(modifier = modifier.height(10.dp))
                 OutlinedTextField(
-                    value = name,
+                    value = number,
                     onValueChange = {
-                        name = it
+                        number = it
                     },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    maxLines = 1
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+                    maxLines = 1,
+                    textStyle = MaterialTheme.typography.titleMedium
                 )
             }
         },
@@ -119,10 +123,11 @@ fun SaveInformation(
             }
         },
         confirmButton = {
-            OutlinedButton(
+            Button(
                 onClick = {
-                    // some kind of logic but using function with check up for sure !!!
-                }
+                   // some kind of logic but using function with check up for sure !!!
+                },
+                 enabled = if(name.isEmpty() || number.isEmpty()) false else true
             ) {
                 Text("Save")
             }
@@ -149,3 +154,8 @@ fun LightMode() {
         MainScreen()
     }
 }
+
+/*
+2 ta String qabul qilsin
+agar bo'sh joyi mavjud bo'lsa
+ */
