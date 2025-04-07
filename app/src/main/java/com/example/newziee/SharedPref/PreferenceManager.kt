@@ -13,6 +13,7 @@ class PreferenceManager(
     ) {
         editor.putString(key, value)
         editor.commit()
+
     }
 
     fun getData(

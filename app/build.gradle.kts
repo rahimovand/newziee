@@ -41,6 +41,7 @@ android {
 
 dependencies {
 
+    implementation(libs.google.gson)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
