@@ -53,7 +53,7 @@ fun EachItemRep(
                     .drawBehind {
                         drawCircle(color = tertiaryDark)
                     }
-                    .padding(10.dp),
+                    .padding(15.dp),
                 text = "${name[0]}"
             )
             Spacer(modifier = Modifier.width(10.dp))

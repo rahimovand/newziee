@@ -1,26 +1,16 @@
 package com.example.newziee.logic
 
+import com.example.newziee.data.contact
+
 fun String.isNotEmptyAndNotBlank(): Boolean {
-   return (this.isNotBlank() && this.isNotEmpty())
+    return (this.isNotBlank() && this.isNotEmpty())
 }
 
-/*
-2 ta String qabul qilsin
-agar bo'sh joyi mavjud bo'lsa
-ortga qaytsin va bo'sh joy mavjud
-joy qizil qilib qilib ko'rsatilsin
-agar bo'lmasa listdan ma'lumotlar olib kelinsin birhillik tekshirilsin
-mobodo bir hil bo'lmasa
-listlarga saqlanib olinsin
-hamda zudlik bilan ekranda ko'rsatilsin
-yo'qsa yana bir bor qizil ko'rsatilsin + toast ekranda chiqarilsin
- */
+fun checkAndSaveData(value1: String, value2: String): contact {
 
-fun myChecker(
-    value1: String,
-    value2: String,
-    checkerName: (Boolean) -> Unit,
-    checkerNumber: (Boolean) -> Unit
-    ) {
+    val name = value1.replace(" ", "")
+    val number = value2.replace(" ", "")
+
+    return contact(name = name, number = number)
 
 }
