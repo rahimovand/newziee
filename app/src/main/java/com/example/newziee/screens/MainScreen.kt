@@ -49,7 +49,7 @@ import com.example.newziee.ui.theme.NewzieeTheme
 fun MainScreen(
     modifier: Modifier = Modifier
 ) {
-    val myList = listOf("Alisher","Olimjon","Kozimbek")
+
     var isClicked by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
@@ -81,10 +81,9 @@ fun MainScreen(
             contentPadding = PaddingValues(horizontal = 4.dp, vertical = 4.dp)
 
         ) {
-            items(myList.size) {
+            items(1) {
 
                 EachItemRep(
-                    name = myList[it]
                 )
                 // seperatedEachItem representation will be showed here up so
 
