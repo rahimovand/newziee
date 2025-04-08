@@ -1,23 +1,23 @@
 package com.example.newziee.screens.component
 
-import android.content.SharedPreferences
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -34,35 +34,38 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.newziee.SharedPref.PreferenceManager
 import com.example.newziee.ui.theme.NewzieeTheme
-import com.example.newziee.ui.theme.tertiaryDark
 
 @Composable
 fun EachItemRep(
     modifier: Modifier = Modifier,
     name: String = "Alisher",
-    itemClicked: () -> Unit,
-    shape: Shape =  RoundedCornerShape(topEnd = 20.dp , topStart = 35.dp, bottomStart = 25.dp),
-    colorOfCircle: Color = MaterialTheme.colorScheme.surfaceContainerHighest
+    itemForChangeClicked: () -> Unit,
+    itemToDeleteClicked: () -> Unit,
+    shape: Shape = CutCornerShape(topStart = 25.dp, bottomEnd = 35.dp),
+    colorOfCircle: Color = MaterialTheme.colorScheme.inversePrimary
 ) {
+
     var isExpanded by rememberSaveable { mutableStateOf(false) }
+
 
     Surface(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(5.dp)
-            .clip(shape),
+            .clip(shape)
+            .border(shape = shape, color = MaterialTheme.colorScheme.surfaceTint, width = 1.dp)
+        ,
         onClick = {
-            itemClicked()
             isExpanded = !isExpanded
         },
-        shape =shape,
+        shape = shape,
         color = MaterialTheme.colorScheme.surfaceContainerHigh
     ) {
         Column(
@@ -71,7 +74,7 @@ fun EachItemRep(
                 .wrapContentHeight(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+        ) {
             Row(
                 modifier = modifier
                     .fillMaxWidth()
@@ -82,14 +85,15 @@ fun EachItemRep(
             ) {
                 Text(
                     modifier = modifier
+                        .padding(start = 10.dp)
                         .drawBehind {
                             drawCircle(color = colorOfCircle)
                         }
                         .padding(15.dp)
                     ,
-                    text = "${name[0].uppercase()}",
+                    text = name[0].uppercase(),
 
-                )
+                    )
                 Spacer(modifier = Modifier.width(10.dp))
 
                 Text(
@@ -100,7 +104,6 @@ fun EachItemRep(
                 Spacer(modifier = modifier.weight(1f))
                 IconButton(
                     onClick = {
-                        itemClicked()
                         isExpanded = !isExpanded
                     }
                 ) {
@@ -121,12 +124,17 @@ fun EachItemRep(
                 ) {
                     Spacer(modifier = modifier.weight(1f))
                     OutlinedButton(
-                        onClick = {}
+                        onClick = {
+                            itemToDeleteClicked()
+                        }
                     ) {
                         Text("Remove")
                     }
                     Button(
-                        onClick = {}
+                        onClick = {
+                            itemForChangeClicked()
+                        },
+                        modifier = modifier.padding(end = 15.dp)
                     ) {
                         Text("Edit")
                     }
@@ -136,13 +144,13 @@ fun EachItemRep(
     }
 }
 
-@Preview()
-@Composable()
+@Preview
+@Composable
 fun PreviewOf() {
     NewzieeTheme(
         darkTheme = true
     ) {
-        EachItemRep(itemClicked = {})
+        EachItemRep(itemToDeleteClicked = {}, itemForChangeClicked = {})
     }
 
 }

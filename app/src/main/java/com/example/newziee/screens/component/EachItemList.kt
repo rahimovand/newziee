@@ -4,8 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.AbsoluteCutCornerShape
-import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -18,13 +17,16 @@ import androidx.compose.ui.unit.dp
 import com.example.newziee.data.contact
 
 @Composable
-fun EachItemList(
-    modifier: Modifier,
-    list: List<contact>
+fun ContactLists(
+    modifier: Modifier = Modifier,
+    list: MutableList<contact>,
+    deleteAction: (contact) -> Unit,
+    changeInformationSheet: (contact) -> Unit
 ) {
-    var isClickedToChange by rememberSaveable { mutableStateOf(false) }
-    val oddShape  = CutCornerShape(topEnd = 25.dp , topStart = 25.dp, bottomEnd = 25.dp)
-    val evenShape = RoundedCornerShape(topEnd = 35.dp , topStart = 25.dp, bottomStart = 25.dp)
+
+    val oddShape = CutCornerShape(topStart = 25.dp, bottomEnd = 35.dp)
+    val evenShape = CutCornerShape(topEnd = 35.dp, bottomStart = 25.dp)
+
 
     LazyColumn(
         modifier = modifier
@@ -32,24 +34,18 @@ fun EachItemList(
             .navigationBarsPadding(),
         contentPadding = PaddingValues(horizontal = 5.dp, vertical = 5.dp)
     ) {
-        items(list.size) {
 
+        itemsIndexed(list) { index, item ->
             EachItemRep(
-                name = list[it].name,
-                itemClicked = {
-                    isClickedToChange = !isClickedToChange
-                    /*
-                    scenario:
-                    1) eachClicked item goes there
-                    2) when item is clicked bottom sheet opens up
-                    3) bottom sheet textfield value areas will be filled with local info
-                    4) user can change and save it
-                    5) when the area is blank user cannot save it
-                     */
+                name = item.name,
+                shape = if (index % 2 == 0) evenShape else oddShape,
+                itemForChangeClicked = {
+                    changeInformationSheet(item)
                 },
-                shape = if (it % 2 == 0) evenShape else oddShape
+                itemToDeleteClicked = {
+                    deleteAction(item)
+                }
             )
         }
     }
-
 }

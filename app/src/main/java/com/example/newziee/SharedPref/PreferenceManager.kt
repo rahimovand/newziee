@@ -30,28 +30,25 @@ open class PreferenceManager(context: Context) {
     fun addContact(contact: contact) {
         val list = loadList()
         if (!list.contains(contact)) {
-            if (list.isEmpty()){
-                list.add(contact.copy(id = 1))
-            } else {
-                list.add(contact.copy(list.size + 1))
-            }
+            list.add(contact)
             saveData(list)
         }
     }
 
     fun editContact(contact: contact) {
         val list = loadList()
-        val index = list.indexOfFirst { it.id == contact.id }
+        val index = list.indexOfFirst { it === contact }
         if (index != -1) {
             list[index] = contact
             saveData(list)
         }
     }
 
-    fun deleteContact(contact: contact) {
+    fun deleteContact(contact: contact): MutableList<contact> {
         val list = loadList()
-        val updatedList = list.filter { it.id != contact.id }
+        val updatedList = list.filter { it != contact }
         saveData(updatedList)
+        return loadList()
     }
 
     fun getAllContact(): MutableList<contact> = loadList()

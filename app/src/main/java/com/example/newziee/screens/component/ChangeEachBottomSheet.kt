@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.BottomSheetDefaults
@@ -18,37 +19,51 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.example.newziee.SharedPref.PreferenceManager
+import com.example.newziee.data.contact
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChangeItemSheet(
-    modifier: Modifier =Modifier,
-    isClosedBottomSheet: (Boolean) -> Unit
-){
+    modifier: Modifier = Modifier,
+    isClosedBottomSheet: () -> Unit,
+    contact: contact
+) {
+
+    var name by rememberSaveable { mutableStateOf(contact.name) }
+    var number by rememberSaveable { mutableStateOf(contact.number) }
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    val scope = rememberCoroutineScope()
+
     ModalBottomSheet(
-        onDismissRequest = {
-            isClosedBottomSheet(false)
-        },
-        dragHandle = { BottomSheetDefaults.DragHandle() },
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+        onDismissRequest = isClosedBottomSheet,
+        sheetState = sheetState
     ) {
 
         Column(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(24.dp)
+                .navigationBarsPadding()
                 .imePadding(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
 
             OutlinedTextField(
-                value = "",
+                value = name,
                 onValueChange = {
-
+                    name = it
                 },
                 modifier = modifier.fillMaxWidth(0.9f),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
@@ -57,9 +72,9 @@ fun ChangeItemSheet(
             Spacer(modifier = modifier.height(15.dp))
 
             OutlinedTextField(
-                value = "",
+                value = number,
                 onValueChange = {
-
+                    number = it
                 },
                 modifier = modifier.fillMaxWidth(0.9f)
             )
@@ -70,7 +85,13 @@ fun ChangeItemSheet(
             ) {
                 Spacer(modifier = modifier.weight(1f))
                 OutlinedButton(
-                    onClick = {}
+                    onClick = {
+                        scope.launch {
+                            sheetState.hide()
+                            isClosedBottomSheet()
+                        }
+
+                    }
                 ) {
                     Text("Cancel")
                 }
