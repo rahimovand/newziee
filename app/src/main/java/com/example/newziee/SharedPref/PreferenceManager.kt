@@ -8,9 +8,7 @@ import com.google.gson.reflect.TypeToken
 private const val SHARED_PREF_NAME = "InfoPref"
 private const val KEY_FOR_TOOK = "InfoKey"
 
-class PreferenceManager(
-    context: Context
-) {
+open class PreferenceManager(context: Context) {
     private val sharedPreferences =
         context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
     private val editor = sharedPreferences.edit()

@@ -12,12 +12,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ComposeCompilerApi
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.newziee.ui.theme.NewzieeTheme
@@ -26,7 +24,8 @@ import com.example.newziee.ui.theme.tertiaryDark
 @Composable
 fun EachItemRep(
     modifier: Modifier = Modifier,
-    name: String = "Alisher"
+    name: String = "Alisher",
+    itemClicked: () -> Unit
 ) {
 
     Surface(
@@ -37,7 +36,7 @@ fun EachItemRep(
             .clip(RoundedCornerShape(12.dp)),
         shape = RoundedCornerShape(12.dp),
         onClick = {
-
+            itemClicked()
         },
         color = MaterialTheme.colorScheme.surfaceContainerHigh
     ) {
@@ -72,7 +71,7 @@ fun PreviewOf() {
     NewzieeTheme(
         darkTheme = true
     ) {
-        EachItemRep()
+        EachItemRep(itemClicked = {})
     }
 
 }
