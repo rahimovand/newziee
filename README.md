@@ -24,7 +24,15 @@ A sleek Android app that does saves information for you , manualy can be changed
 |--------------|--------------|--------------|--------------|
 | ![Screenshot_20250409_000018](https://github.com/user-attachments/assets/1e11e77b-4c71-4d7b-93e5-31f44d59b825) | ![Screenshot_20250409_000029](https://github.com/user-attachments/assets/71341278-6272-4cff-8bd9-17dd6ad0c6fe) | ![Screenshot_20250409_000303](https://github.com/user-attachments/assets/288cac6c-617f-433b-84e1-6a44511ddad7) | ![Screenshot_20250409_000330](https://github.com/user-attachments/assets/e53a1c6c-ce43-4ebb-aa87-90d2a6709bd1) |
 
+## 🚀 Tech Stack
 
+- **Kotlin**
+- **Jetpack Compose**
+- **No Architecture**
+- **SharedPreferences**
+- **Gson/Json**
+
+---
 
 
 
