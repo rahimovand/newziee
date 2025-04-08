@@ -35,11 +35,11 @@ open class PreferenceManager(context: Context) {
         }
     }
 
-    fun editContact(contact: contact) {
+    fun editContact(oldContact: contact,newContact:contact) {
         val list = loadList()
-        val index = list.indexOfFirst { it === contact }
+        val index = list.indexOfFirst { it == oldContact }
         if (index != -1) {
-            list[index] = contact
+            list[index] = newContact
             saveData(list)
         }
     }

@@ -71,11 +71,20 @@ fun MainScreen(
                 }
             )
         }   // alertDialog pops up and saves information
+
         if (isChangeInformationClicked && selectedItem != null){
             ChangeItemSheet(
                 contact = selectedItem!!,
                 isClosedBottomSheet = {
                     isChangeInformationClicked = false
+                },
+                changeSpecifiedContact = {
+
+                    obj.editContact(selectedItem!!,it)
+                    list = obj.getAllContact()
+                    selectedItem = null
+                    isChangeInformationClicked = false
+                    // item will come if everything is cool and ready to change
                 }
             )
         }

@@ -28,9 +28,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.newziee.SharedPref.PreferenceManager
 import com.example.newziee.data.contact
+import com.example.newziee.logic.checkAndSaveData
+import com.example.newziee.logic.isNotEmptyAndNotBlank
+import com.example.newziee.logic.replacerFunction
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,19 +42,20 @@ import kotlinx.coroutines.launch
 fun ChangeItemSheet(
     modifier: Modifier = Modifier,
     isClosedBottomSheet: () -> Unit,
-    contact: contact
+    contact: contact,
+    changeSpecifiedContact: (contact) -> Unit
 ) {
 
     var name by rememberSaveable { mutableStateOf(contact.name) }
     var number by rememberSaveable { mutableStateOf(contact.number) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
+    val contactHolder = contact
 
     ModalBottomSheet(
         onDismissRequest = isClosedBottomSheet,
         sheetState = sheetState
     ) {
-
         Column(
             modifier = modifier
                 .fillMaxWidth()
@@ -90,15 +95,19 @@ fun ChangeItemSheet(
                             sheetState.hide()
                             isClosedBottomSheet()
                         }
-
                     }
                 ) {
                     Text("Cancel")
                 }
                 ElevatedButton(
                     onClick = {
-
-                    }
+                       changeSpecifiedContact(checkAndSaveData(name,number))
+                    },
+                    enabled = replacerFunction(
+                        name.replace(" ", ""),
+                        number.replace(" ", ""),
+                        contactHolder
+                    )
                 ) {
                     Text("Change")
                 }

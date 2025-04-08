@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -25,7 +26,7 @@ fun ContactLists(
 ) {
 
     val oddShape = CutCornerShape(topStart = 25.dp, bottomEnd = 35.dp)
-    val evenShape = CutCornerShape(topEnd = 35.dp, bottomStart = 25.dp)
+    val evenShape = CutCornerShape(topEnd = 35.dp, bottomStart = 20.dp)
 
 
     LazyColumn(
@@ -36,16 +37,18 @@ fun ContactLists(
     ) {
 
         itemsIndexed(list) { index, item ->
-            EachItemRep(
-                name = item.name,
-                shape = if (index % 2 == 0) evenShape else oddShape,
-                itemForChangeClicked = {
-                    changeInformationSheet(item)
-                },
-                itemToDeleteClicked = {
-                    deleteAction(item)
-                }
-            )
+            key(item.hashCode()) {
+                EachItemRep(
+                    name = item.name,
+                    shape = if (index % 2 == 0) evenShape else oddShape,
+                    itemForChangeClicked = {
+                        changeInformationSheet(item)
+                    },
+                    itemToDeleteClicked = {
+                        deleteAction(item)
+                    }
+                )
+            }
         }
     }
 }

@@ -16,3 +16,14 @@ fun checkAndSaveData(value1: String, value2: String): contact {
     return contact(name = name, number = number)
 
 }
+
+fun replacerFunction(value1: String, value2: String, contact: contact): Boolean {
+    if (value1 == contact.name && value2 == contact.number) {
+        return false
+    }
+    if (value1.isEmpty() || value2.isEmpty()) {
+        return false
+    } else {
+        return true
+    }
+}

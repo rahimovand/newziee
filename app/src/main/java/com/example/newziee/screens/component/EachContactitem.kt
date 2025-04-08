@@ -136,7 +136,7 @@ fun EachItemRep(
                         },
                         modifier = modifier.padding(end = 15.dp)
                     ) {
-                        Text("Edit")
+                        Text("Change")
                     }
                 }
             }

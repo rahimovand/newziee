@@ -36,10 +36,10 @@ fun SaveInformation(
 ) {
 
     var name by rememberSaveable { mutableStateOf("") }
-    val value = when (name) {
+    val value by rememberSaveable { mutableStateOf(when (name) {
         "" -> ""
         else -> ""
-    }
+    }) }
     var number by rememberSaveable { mutableStateOf(value) } // number holder
 
 
