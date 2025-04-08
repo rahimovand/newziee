@@ -1,6 +1,8 @@
 package com.example.newziee.logic
 
+
 import com.example.newziee.data.contact
+
 
 fun String.isNotEmptyAndNotBlank(): Boolean {
     return (this.isNotBlank() && this.isNotEmpty())
